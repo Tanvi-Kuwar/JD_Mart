@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JD Mart | Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+
+    
+<div class="container">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <div class="brand">
+      <img src="/images/image.png" alt="JD Mart Logo" height="40" style="border-radius: 8px;"/>
+      <div>
+        <h3>JD Mart</h3>
+        <span>Buyer Portal</span>
+      </div>
+    </div>
+
+    <h1>
+      Source Premium Crops<br>
+      Directly from Farmers
+    </h1>
+
+    <p>
+      Connect with verified farmers, get competitive prices, and grow your business.
+    </p>
+
+    <ul class="features">
+      <li>✔ 500+ verified suppliers</li>
+      <li>✔ Real-time market prices</li>
+      <li>✔ Secure payments</li>
+      <li>✔ Fast delivery</li>
+    </ul>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Sign in to your dashboard</p>
+
+    <!-- Tabs -->
+    <div class="tabs">
+  <a href="/login" class="tab active">Password</a>
+  <a href="/otp-login" class="tab">OTP</a>
+</div>
+
+
+    
+
+    <form action="/login" method="POST">
+
+      <div class="input-group">
+        <label>Email or Phone</label>
+        <div class="input-icon">
+          <span>✉</span>
+          <input 
+            type="text" 
+            name="login" 
+            placeholder="demo@jdmart.com" 
+            required
+          >
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="password-header">
+          <label>Password</label>
+          <a href="/forgot-password">Forgot password?</a>
+        </div>
+
+        <div class="input-icon">
+          <span><i class="fa-solid fa-lock" style="color: rgb(77, 76, 76);"></i></span>
+          <input 
+            type="password" 
+            name="password" 
+            placeholder="demo123" 
+            required
+          >
+          <span class="eye">👁</span>
+        </div>
+      </div>
+
+      <button class="btn" type="submit">
+        Sign In →
+      </button>
+
+    </form>
+
+    <!-- Demo Box -->
+    <div class="demo-box">
+      <strong>Demo Credentials</strong>
+      <p>Email: demo@jdmart.com • Password: demo123</p>
+    </div>
+
+    <p class="register-link">
+      Don't have an account?
+      <a href="/register">Create Account</a>
+    </p>
+
+  </div>
+
+</div>
+<script>
+  const path = window.location.pathname;
+  const tabs = document.querySelectorAll(".tab");
+
+  tabs.forEach(tab => {
+    if (tab.getAttribute("href") === path) {
+      tab.classList.add("active");
+    } else {
+      tab.classList.remove("active");
+    }
+  });
+</script>
+
+</body>
+</html>

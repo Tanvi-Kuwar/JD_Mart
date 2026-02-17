@@ -1,0 +1,597 @@
+/* ================== BASE ================== */
+body {
+  background: #f8faf8;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* ================== STEP BAR ================== */
+.checkout-steps {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 30px 0;
+  align-items: center;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 500;
+  color: #7b8f7b;
+  background: #eef4ee;
+}
+
+a{
+   text-decoration: none;
+}
+
+.step.active {
+  background: #1fa64a;
+  color: #fff;
+}
+
+.step-line {
+  width: 50px;
+  height: 2px;
+  background: #1fa64a;
+}
+
+/* ================== LAYOUT ================== */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 50px;
+}
+
+/* ================== ADDRESS CARD ================== */
+.address-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #e6efe6;
+}
+
+.address-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.address-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #daf2e2;
+  color: #1fa64a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #334d33;
+}
+
+textarea, input {
+  border-radius: 10px !important;
+  border: 1px solid #dfe8df !important;
+  padding: 12px !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea:focus, input:focus {
+  border-color: #1fa64a !important;
+  box-shadow: none !important;
+}
+
+/* ================== SUMMARY ================== */
+.summary-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #e6efe6;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: #556b55;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1fa64a;
+  margin: 18px 0;
+}
+
+/* ================== BUTTONS ================== */
+.btn-primary {
+  background: #1fa64a;
+  border: none;
+  padding: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+}
+
+.btn-primary:hover {
+  background: #178a3d;
+}
+
+.btn-outline {
+  border: 2px solid #1fa64a;
+  color: #1fa64a;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  background: transparent;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+
+
+/* checkout.ejs */
+
+
+/* ================== CART CARD ================== */
+/* ================== WIDE CENTERED CONTAINER ================== */
+
+/* ================== WRAPPER FOR HORIZONTAL CENTERING ================== */
+.container-wrapper {
+  display: flex;
+  justify-content: center; /* centers container-wide horizontally */
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-top: 20px;
+}
+
+/* ================== WIDE CONTAINER ================== */
+.container-wide {
+  width: 100%;
+  max-width: 1200px; /* controls total width */
+}
+
+/* ================== CHECKOUT LAYOUT ================== */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* left : right ratio */
+  gap: 24px;
+}
+
+/* Optional: make it responsive */
+@media (max-width: 992px) {
+  .checkout-layout {
+    grid-template-columns: 1fr; /* stack left and right */
+  }
+}
+
+
+
+.cart-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #e6efe6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.cart-left {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.product-img {
+  width: 72px;
+  height: 72px;
+  background: #daf2e2;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.qty-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #1fa64a;
+  background: none;
+  color: #1fa64a;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.qty-btn:hover {
+  background: #1fa64a;
+  color: #fff;
+}
+
+#qtyInput {
+  width: 60px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid #dfe8df;
+  padding: 6px;
+}
+
+/* ================== SUMMARY CARD ================== */
+.summary-card h4 {
+  font-weight: 600;
+  color: #334d33;
+}
+
+.summary-card .summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: #556b55;
+  font-size: 15px;
+}
+
+.summary-card .summary-total {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1fa64a;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+/* ================== CHECKOUT BUTTON ================== */
+.checkout-btn {
+  width: 100%;
+  background: #1fa64a;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.checkout-btn:hover {
+  background: #178a3d;
+}
+
+/* ================== ADDITIONAL BUTTON (Address) ================== */
+.summary-card .btn-success {
+  background: #1fa64a;
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 600;
+  margin-top: 12px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.summary-card .btn-success:hover {
+  background: #178a3d;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 992px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+  .cart-card, .summary-card {
+    width: 100%;
+  }
+}
+
+
+/* ================== BODY ================== */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f9faf7;
+  margin: 0;
+}
+
+/* ================== STEP BAR ================== */
+.checkout-steps {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 30px 0 5px 0;
+  align-items: center;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 500;
+  color: #7b8f7b;
+  background: #eef4ee;
+}
+
+.step.active {
+  background: #1fa64a;
+  color: #fff;
+}
+
+.step-line {
+  width: 50px;
+  height: 2px;
+  background: #1fa64a;
+}
+
+/* ================== MAIN CONTAINER ================== */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* left : right ratio */
+  gap: 30px;
+  padding: 20px;
+}
+
+/* ================== CARD ================== */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #e6efe6;
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: rgb(32, 30, 30);
+  font-weight: 600;
+}
+
+.muted {
+  color: #6c757d;
+  font-size: 14px;
+}
+
+/* ================== ORDER ITEM ================== */
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* ================== SUMMARY ROW ================== */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+.summary-total {
+  font-size: 22px;
+  font-weight: 700;
+  color: #198754;
+}
+
+/* ================== ICONS ================== */
+.icon {
+  color: #198754;
+  margin-right: 6px;
+}
+
+/* ================== BUTTONS ================== */
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #198754, #28a745);
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #157347, #198754);
+}
+
+.btn-outline {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid #198754;
+  background: #fff;
+  color: #198754;
+  margin-top: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.btn-outline:hover {
+  background: #198754;
+  color: #fff;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 992px) {
+  .container {
+    grid-template-columns: 1fr; /* stack left and right on mobile */
+    padding: 16px;
+  }
+
+  .btn-primary, .btn-outline {
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+
+
+/* ================== SUCCESS WRAPPER ================== */
+.success-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+  background: #f8faf8;
+}
+
+/* ================== SUCCESS CARD ================== */
+.success-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 30px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.success-card .check-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #1fa64a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 36px;
+  margin: 0 auto 20px auto;
+}
+
+.success-card h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1fa64a;
+  margin-bottom: 10px;
+}
+
+.success-card p {
+  font-size: 16px;
+  color: #556b55;
+  margin-bottom: 20px;
+}
+
+.success-card .order-id {
+  font-weight: 600;
+  color: #334d33;
+  margin-bottom: 30px;
+}
+
+.success-card .order-id span {
+  color: #1fa64a;
+  font-weight: 700;
+}
+
+/* ================== BUTTON GROUP ================== */
+.btn-group-custom {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-group-custom .btn {
+  flex: 1 1 48%;
+  padding: 12px 0;
+  font-weight: 600;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-group-custom .btn-success {
+  background: #1fa64a;
+  border: none;
+  color: #fff;
+}
+
+.btn-group-custom .btn-success:hover {
+  background: #178a3d;
+}
+
+.btn-group-custom .btn-outline-success {
+  background: #fff;
+  border: 2px solid #1fa64a;
+  color: #1fa64a;
+}
+
+.btn-group-custom .btn-outline-success:hover {
+  background: #1fa64a;
+  color: #fff;
+}
+
+/* ================== TOAST ================== */
+.toast-custom {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #1fa64a;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+.toast-custom.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.toast-custom i {
+  font-size: 20px;
+}

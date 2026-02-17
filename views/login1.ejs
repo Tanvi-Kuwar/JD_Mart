@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JD Mart | Create Account</title>
+  <link rel="stylesheet" href="/css/register.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <div class="brand">
+      <div class="logo">🍃</div>
+      <div>
+        <h3>JD Mart</h3>
+        <span>Buyer Portal</span>
+      </div>
+    </div>
+
+    <h1>Source Premium Crops<br>Directly from Farmers</h1>
+
+    <p>
+      Connect with verified farmers, get competitive prices, and grow your business.
+    </p>
+
+    <ul class="features">
+      <li>✔ 500+ verified suppliers</li>
+      <li>✔ Real-time market prices</li>
+      <li>✔ Secure payments</li>
+      <li>✔ Fast delivery</li>
+    </ul>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="top-bar">
+      <a href="/login">← Back</a>
+    </div>
+
+    <h2>Create Account</h2>
+    <p class="subtitle">Join JD Mart as a buyer</p>
+
+    <form action="/login" method="POST">
+
+  <div class="input-group">
+    <label>Email or Phone</label>
+    <input 
+      type="text" 
+      name="login" 
+      placeholder="Email or Phone" 
+      required 
+    />
+  </div>
+
+  <p class="forgot-password-link">
+    <a href="/forgot-password">Forgot Password?</a>
+  </p>
+
+  <div class="input-group">
+    <label>Password</label>
+    <input 
+      type="password" 
+      name="password" 
+      placeholder="Min 6 chars" 
+      required 
+    />
+  </div>
+
+  <button type="submit" class="btn">
+    Login →
+  </button>
+
+</form>
+
+
+    <p class="register-link">
+      Don't have an account? <a href="/register">Create Account</a>
+    </p>
+
+  </div>
+
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JD Mart | Create Account</title>
+  <link rel="stylesheet" href="/css/register.css" />
+  <link rel="stylesheet" href="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <div class="brand">
+      <img src="/images/image.png" alt="JD Mart Logo" height="40" style="border-radius: 8px;"/>
+      <div>
+        <h3>JD Mart</h3>
+        <span>Buyer Portal</span>
+      </div>
+    </div>
+
+    <h1>Source Premium Crops<br>Directly from Farmers</h1>
+
+    <p>
+      Connect with verified farmers, get competitive prices, and grow your business.
+    </p>
+
+    <ul class="features">
+      <li>✔ 500+ verified suppliers</li>
+      <li>✔ Real-time market prices</li>
+      <li>✔ Secure payments</li>
+      <li>✔ Fast delivery</li>
+    </ul>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="top-bar">
+      <a href="/login">← Back</a>
+    </div>
+
+    
+
+    <h2>Create Account</h2>
+    <p class="subtitle">Join JD Mart as a buyer</p>
+
+    <form action="/register" method="POST">
+
+      <div class="row">
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" name="fullName" placeholder="Your name" required />
+        </div>
+
+        <div class="input-group">
+          <label>Phone</label>
+          <input type="text" name="phone" placeholder="9876543210" required />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required />
+      </div>
+
+      <div class="row">
+        <div class="input-group">
+          <label>Business Name</label>
+          <input type="text" name="business" placeholder="Your business" required />
+        </div>
+
+        <div class="input-group">
+          <label>Business Type</label>
+          <select name="businessType" required>
+            <option value="Retailer">Retailer</option>
+            <option value="Trader">Trader</option>
+            <option value="Wholesaler">Wholesaler</option>
+            <option value="Exporter">Exporter</option>
+            <option value="Farmer">Farmer</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Min 6 chars" required />
+        </div>
+
+        <div class="input-group">
+          <label>Confirm</label>
+          <input type="password" name="confirm" placeholder="Repeat" required />
+        </div>
+      </div>
+
+      <input type="hidden" name="defaultAddress" id="defaultAddress">
+
+      <button type="submit" class="btn">
+        Create Account →
+      </button>
+
+    </form>
+
+    <p class="login-link">
+      Already have an account? <a href="/login">Sign In</a>
+    </p>
+
+  </div>
+
+</div>
+<script>
+let locationReady = false;
+
+async function getLocationAndSave() {
+  if (!navigator.geolocation) {
+    console.log("Geolocation not supported");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      try {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`
+        );
+
+        const data = await res.json();
+
+        const area = data.address.suburb || data.address.village || "";
+        const city =
+          data.address.city ||
+          data.address.town ||
+          data.address.state ||
+          "";
+        const country = data.address.country || "";
+
+        const fullAddress = `${area ? area + ", " : ""}${city}, ${country}`;
+
+        document.getElementById("defaultAddress").value = fullAddress;
+
+        console.log("Saved address:", fullAddress);
+        locationReady = true;
+      } catch (err) {
+        console.log("Reverse geocode failed", err);
+      }
+    },
+    (err) => {
+      console.log("Location denied", err);
+    }
+  );
+}
+
+// Block form submit until location is ready
+document.querySelector("form").addEventListener("submit", function (e) {
+  if (!locationReady) {
+    e.preventDefault();
+    alert("Please allow location access to set your delivery address.");
+  }
+});
+
+// Run on page load
+getLocationAndSave();
+</script>
+
+</body>
+</html>

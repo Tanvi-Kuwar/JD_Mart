@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JD Mart | Browse Products</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+ <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/checkout.css">
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background: #f9faf7;
+      
+    }
+    .container-wrapper{
+    display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      margin: 0;
+    }
+    .empty-cart-card {
+      
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+
+    .empty-cart-card i {
+      font-size: 50px;
+      color: #198754;
+      margin-bottom: 20px;
+    }
+
+    .empty-cart-card h2 {
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .empty-cart-card p {
+      color: #6c757d;
+      margin-bottom: 25px;
+    }
+
+    .btn-browse {
+      padding: 12px 24px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #198754, #28a745);
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-browse:hover {
+      background: linear-gradient(90deg, #28a745, #198754);
+    }
+  </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+
+    <!-- LOGO -->
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/images/image.png" alt="JD Mart Logo" height="40" style="border-radius: 8px;"/>
+      <span class="ms-2 fw-bold">JD Mart</span>
+    </a>
+
+    <!-- LOCATION -->
+    <div class="ms-auto me-4 d-flex align-items-center">
+      <i class="fa-solid fa-location-dot me-1" style="color: #16a34a;"></i>
+      <span id="locationText" style="font-size: 15px;">Getting location...</span>
+    </div>
+
+    <!-- REST OF NAVBAR -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-search ms-3">
+        <input type="text" id="productSearch" placeholder="Search for crops, grains, vegetables..." class="form-control" />
+      </div>
+
+      <div class="navbar-icons ms-3">
+        
+          <!-- <i class="fa-regular fa-bell"></i> -->
+       
+          <a href="/notifications" class="position-relative me-3">
+            
+            <i class="fa-regular fa-bell fa-lg"></i>
+            <% 
+              // Show unread count if any 
+              const unreadCount = notifications?.filter(n => n.status === "unread").length || 0; 
+            %>
+            <% if(unreadCount > 0) { %>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <%= unreadCount %>
+              </span>
+            <% } %>
+            
+          </a>
+        
+          <a href="/browse-products">
+            <i class="fa-solid fa-cart-shopping"></i> 
+          </a>
+
+
+        <!-- USER DROPDOWN -->
+    <div class="navbar-user" id="userDropdown" onclick="toggleUserDropdown()">
+      <div class="avatar">
+        <%= user?.fullName?.charAt(0).toUpperCase() || "U" %>
+      </div>
+      <span><%= user?.fullName?.split(" ")[0] || "Guest" %></span>
+      <i class="fa-solid fa-angle-down toggle-icon"></i>
+
+      <div class="jd-user-menu">
+        <div class="jd-user-info">
+          <strong><%= user?.fullName || "Guest User" %></strong>
+          <small><%= user?.email || "Not logged in" %></small>
+        </div>
+        <a href="/profile"><i class="fa-regular fa-user"></i> Profile</a>
+        <a href="/orders"><i class="fa-solid fa-box"></i> Orders</a>
+        <div class="jd-divider"></div>
+        <a href="/logout" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+      </div>
+    </div>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
+  <div class="container-wrapper">
+    <div class="empty-cart-card">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <h2>Your Cart is Empty</h2>
+    <p>Start shopping to add items to your cart.</p>
+    <button class="btn-browse" onclick="window.location.href='/products'">
+      Browse Products
+    </button>
+  </div>
+  </div>
+
+  <script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+/* PAGE BACKGROUND */
+body {
+  background: #f6faf7;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* SUCCESS WRAPPER */
+.success-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+/* SUCCESS CARD */
+.success-card {
+  background: #ffffff;
+  width: 720px;
+  padding: 70px 60px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+}
+
+/* CHECK CIRCLE */
+.check-circle {
+  width: 120px;
+  height: 120px;
+  background: #dff5e8;
+  border-radius: 50%;
+  margin: 0 auto 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-circle i {
+  font-size: 48px;
+  color: #1e9b4b;
+  border: 3px solid #1e9b4b;
+  padding: 18px;
+  border-radius: 50%;
+}
+
+/* TEXT */
+.success-card h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1c1c1c;
+}
+
+.success-card p {
+  color: #6b6b6b;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+/* ORDER ID */
+.order-id {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e9b4b;
+  margin-bottom: 36px;
+}
+
+.order-id span {
+  font-weight: 700;
+}
+
+/* BUTTON GROUP */
+.btn-group-custom {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* BUTTONS */
+.btn-outline-success {
+  padding: 12px 26px;
+  border-radius: 30px;
+  font-weight: 600;
+  border: 2px solid #1e9b4b;
+  color: #1e9b4b;
+  background: #fff;
+}
+
+.btn-outline-success:hover {
+  background: #1e9b4b;
+  color: #fff;
+}
+
+.btn-success {
+  padding: 12px 34px;
+  border-radius: 30px;
+  font-weight: 600;
+  background: #1e9b4b;
+  border: none;
+}
+
+.btn-success:hover {
+  background: #178a41;
+}
+
+/* TOAST */
+.toast-custom {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #ffffff;
+  padding: 14px 22px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  animation: slideIn 0.4s ease;
+}
+
+.toast-custom i {
+  color: #1e9b4b;
+  font-size: 18px;
+}
+
+/* TOAST ANIMATION */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

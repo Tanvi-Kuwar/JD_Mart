@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JD Mart | Checkout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/css/checkout.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+
+    <!-- LOGO -->
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/images/image.png" alt="JD Mart Logo" height="40" style="border-radius: 8px;"/>
+      <span class="ms-2 fw-bold">JD Mart</span>
+    </a>
+
+    <!-- LOCATION -->
+    <div class="ms-auto me-4 d-flex align-items-center">
+      <i class="fa-solid fa-location-dot me-1" style="color: #16a34a;"></i>
+      <span id="locationText" style="font-size: 15px;">Getting location...</span>
+    </div>
+
+    <!-- REST OF NAVBAR -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-search ms-3">
+        <input type="text" id="productSearch" placeholder="Search for crops, grains, vegetables..." class="form-control" />
+      </div>
+
+      <div class="navbar-icons ms-3">
+        <a href="/notifications" class="position-relative me-3">
+            
+            <i class="fa-regular fa-bell fa-lg"></i>
+            <% 
+              // Show unread count if any 
+              const unreadCount = notifications?.filter(n => n.status === "unread").length || 0; 
+            %>
+            <% if(unreadCount > 0) { %>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <%= unreadCount %>
+              </span>
+            <% } %>
+            
+          </a>
+        
+          <a href="/browse-products">
+            <i class="fa-solid fa-cart-shopping"></i> 
+          </a>
+
+        <!-- USER DROPDOWN -->
+        <div class="navbar-user" id="userDropdown">
+          <div class="avatar">
+            <%= user?.fullName?.charAt(0).toUpperCase() || "U" %>
+          </div>
+          <span><%= user?.fullName?.split(" ")[0] || "Guest" %></span>
+          <i class="fa-solid fa-chevron-down"></i>
+
+          <div class="jd-user-menu">
+            <div class="jd-user-info">
+              <strong><%= user?.fullName || "Guest User" %></strong>
+              <small><%= user?.email || "Not logged in" %></small>
+            </div>
+            <a href="/profile"><i class="fa-regular fa-user"></i> Profile</a>
+            <a href="/orders"><i class="fa-solid fa-box"></i> Orders</a>
+            <div class="jd-divider"></div>
+            <a href="/logout" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+  <!-- ===== STEPS ===== -->
+  <!-- STEPS -->
+  <div class="checkout-steps">
+
+  <!-- CART -->
+  <a href="/checkout/<%= product._id %>?qty=<%= qty %>" class="step-link">
+    <div class="step">
+      <i class="bi bi-cart"></i> Cart
+    </div>
+  </a>
+
+  <div class="step-line"></div>
+
+  <!-- ADDRESS -->
+  <a href="/checkout/address/<%= product._id %>?qty=<%= qty %>" class="step-link">
+    <div class="step">
+      <i class="bi bi-geo-alt"></i> Address
+    </div>
+  </a>
+
+  <div class="step-line"></div>
+
+  <!-- REVIEW (current) -->
+  <div class="step active">
+    <i class="bi bi-card-text"></i> Review
+  </div>
+
+</div>
+
+
+  <!-- ===== MAIN ===== -->
+<div class="container">
+
+  <!-- LEFT -->
+  <div>
+
+    <!-- ORDER SUMMARY -->
+    <div class="card">
+      <h3>Order Summary</h3>
+
+      <div class="order-item">
+        <div>
+          <h6><%= product.name %></h6>
+          <div class="muted">
+            Grade: <%= product.grade %> |
+            <%= qty %> quintal(s) × ₹<%= product.pricePerQuintal %>
+          </div>
+        </div>
+        <div class="price">₹<%= subtotal %></div>
+      </div>
+    </div>
+
+    <!-- DELIVERY ADDRESS -->
+    <div class="card">
+      <h3><i class="fa-solid fa-location-dot me-1"></i> Delivery Address</h3>
+      <p class="muted"><%= address || user.defaultAddress %></p>
+    </div>
+
+    <!-- DELIVERY TIME -->
+    <div class="card">
+      <h3><i class="fa-regular fa-truck"></i> Expected Delivery</h3>
+      <p class="muted">
+        <%= product.deliveryTime.minDays %> –
+        <%= product.deliveryTime.maxDays %> Business Days
+      </p>
+    </div>
+
+  </div>
+
+  <!-- RIGHT -->
+  <div>
+    <div class="card">
+      <h3>Payment Summary</h3>
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>₹<%= subtotal %></span>
+      </div>
+
+      <div class="summary-row">
+        <span>Delivery Fee</span>
+        <span>₹<%= deliveryFee %></span>
+      </div>
+
+      <p class="muted">Free delivery on orders above ₹5,000</p>
+
+      <hr>
+
+      <div class="summary-row summary-total">
+        <span>Total</span>
+        <span>₹<%= total %></span>
+      </div>
+
+      <form action="/checkout/review/<%= product._id %>" method="POST">
+        <input type="hidden" name="quantity" value="<%= qty %>">
+        <input type="hidden" name="address" value="<%= address %>">
+
+        <button class="btn-primary">
+          <i class="bi bi-check2-circle"></i> Place Order
+        </button>
+      </form>
+
+      <button class="btn-outline" onclick="history.back()">
+        ← Back
+      </button>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

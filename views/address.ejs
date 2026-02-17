@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JD Mart | Delivery Address</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+    <link rel="stylesheet" href="/css/checkout.css">
+    <link rel="stylesheet" href="/css/style.css">
+  
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+
+    <!-- LOGO -->
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/images/image.png" alt="JD Mart Logo" height="40" style="border-radius: 8px;"/>
+      <span class="ms-2 fw-bold">JD Mart</span>
+    </a>
+
+    <!-- LOCATION -->
+    <div class="ms-auto me-4 d-flex align-items-center">
+      <i class="fa-solid fa-location-dot me-1" style="color: #16a34a;"></i>
+      <span id="locationText" style="font-size: 15px;">Getting location...</span>
+    </div>
+
+    <!-- REST OF NAVBAR -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-search ms-3">
+        <input type="text" id="productSearch" placeholder="Search for crops, grains, vegetables..." class="form-control" />
+      </div>
+
+      <div class="navbar-icons ms-3">
+        <a href="/notifications" class="position-relative me-3">
+            
+            <i class="fa-regular fa-bell fa-lg"></i>
+            <% 
+              // Show unread count if any 
+              const unreadCount = notifications?.filter(n => n.status === "unread").length || 0; 
+            %>
+            <% if(unreadCount > 0) { %>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <%= unreadCount %>
+              </span>
+            <% } %>
+            
+          </a>
+        
+          <a href="/browse-products">
+            <i class="fa-solid fa-cart-shopping"></i> 
+          </a>
+
+        <!-- USER DROPDOWN -->
+        <div class="navbar-user" id="userDropdown">
+          <div class="avatar">
+            <%= user?.fullName?.charAt(0).toUpperCase() || "U" %>
+          </div>
+          <span><%= user?.fullName?.split(" ")[0] || "Guest" %></span>
+          <i class="fa-solid fa-chevron-down"></i>
+
+          <div class="jd-user-menu">
+            <div class="jd-user-info">
+              <strong><%= user?.fullName || "Guest User" %></strong>
+              <small><%= user?.email || "Not logged in" %></small>
+            </div>
+            <a href="/profile"><i class="fa-regular fa-user"></i> Profile</a>
+            <a href="/orders"><i class="fa-solid fa-box"></i> Orders</a>
+            <div class="jd-divider"></div>
+            <a href="/logout" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+  <!-- STEPS -->
+  <!-- STEPS -->
+  <div class="checkout-steps">
+
+  <!-- CART -->
+  <a href="/checkout/<%= product._id %>?qty=<%= qty %>" class="step-link">
+    <div class="step">
+      <i class="bi bi-cart"></i> Cart
+    </div>
+  </a>
+
+  <div class="step-line"></div>
+
+  <!-- ADDRESS -->
+    <div class="step active">
+      <i class="bi bi-geo-alt"></i> Address
+    </div>
+  
+
+  <div class="step-line"></div>
+
+  <!-- REVIEW (current) -->
+  <div class="step">
+    <i class="bi bi-card-text"></i> Review
+  </div>
+
+</div>
+
+
+ <div class="container-wrapper">
+  <div class="container-wide">
+    <div class="checkout-layout">
+
+      <!-- LEFT: Address textarea -->
+      <div class="address-card">
+        <div class="address-header">
+          <div class="address-icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <div>
+            <h4 class="mb-0">Delivery Address</h4>
+            <small class="text-muted">Where should we deliver?</small>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Full Address</label>
+          <textarea id="addressTextarea" rows="4" required>
+<%= user.defaultAddress || "123 Market Street, Mumbai, Maharashtra 400001" %>
+          </textarea>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Delivery Notes (Optional)</label>
+          <input
+            type="text"
+            id="notesInput"
+            placeholder="Any special instructions for delivery"
+          >
+        </div>
+      </div>
+
+      <!-- RIGHT: Summary & Buttons -->
+      <div class="summary-card">
+        <h4 class="mb-4">Order Summary</h4>
+
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>₹<%= subtotal.toLocaleString("en-IN") %></span>
+        </div>
+
+        <div class="summary-row">
+          <span>Delivery Fee</span>
+          <span>₹<%= deliveryFee.toLocaleString("en-IN") %></span>
+        </div>
+
+        <small class="text-muted">
+          Free delivery on orders above ₹5,000
+        </small>
+
+        <hr>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <span>₹<%= total.toLocaleString("en-IN") %></span>
+        </div>
+
+        <a href="/checkout/<%= product._id %>" class="btn-outline w-100 text-center d-block mb-2">
+          ← Back to Cart
+        </a>
+
+        <!-- SINGLE FORM for Continue to Review -->
+        <form action="/checkout/address/<%= product._id %>" method="POST">
+          <input type="hidden" name="quantity" value="<%= qty %>">
+          <input type="hidden" name="address" id="addressInput">
+          <input type="hidden" name="notes" id="notesInput">
+          <button class="btn btn-primary w-100">
+            Continue to Review →
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const form = document.querySelector('form[action*="/checkout/address"]');
+form.addEventListener('submit', function(e) {
+  document.getElementById('addressInput').value = document.getElementById('addressTextarea').value.trim();
+  document.getElementById('notesInput').value = document.getElementById('notesInput').value.trim();
+});
+</script>
+<script src="/js/script.js"></script>
+</body>
+</html>
