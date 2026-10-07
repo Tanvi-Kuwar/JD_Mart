@@ -134,6 +134,11 @@ app.use("/profile", profileRoutes);
 
 app.use("/notifications", notificationRoutes);
 
+
+app.get("/", (req, res) => {
+  res.redirect("/login");
+});
+
 // ======================
 // 404
 // ======================
