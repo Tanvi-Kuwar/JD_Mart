@@ -1,3 +1,4 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 // const { users } = require("./user_data");
 // const User = require("../models/user");
@@ -5,7 +6,7 @@ const { products } = require("./product_data");
 const Product = require("../models/product");
 // const bcrypt = require("bcryptjs");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/jdmart";
+const MONGO_URL = process.env.MONGO_URL;
 
 // Connect to MongoDB
 async function main() {
